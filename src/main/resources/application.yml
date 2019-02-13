@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: education-kafka:9092  # ${vcap.services.kakfa.host_port} and inject value from env variable
+          zkNodes: education-kafka-zookeeper:2181
+          configuration:
+            key:
+              deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bindings:
+        class-topic:
+          destination: enrollment-total-output
+          contentType: application/json
+          consumer:
+            headerMode: raw
+
+eureka:
+  client:
+    enabled: false
+
